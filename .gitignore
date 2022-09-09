@@ -1,0 +1,14 @@
+.Rhistory
+_main.docx
+_main.Rmd
+*.Rproj
+*.docx
+_book/
+_bookdown_files/
+**/plots
+
+.Rproj.user/
+libs/
+
+
+SSmodels/

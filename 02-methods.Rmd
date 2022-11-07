@@ -17,29 +17,63 @@ tab <- captioner(prefix = "Table", suffix = ".", style = "b", style_prefix = TRU
 
 ### Biological
 
-The growth model used was a von Bertanlanffy model with parameters $K = 0.133$, $L_{\infty} = 1115$ mm, $t_{0} = -1.76$, and $CV = 0.1$ (`r figure("biologypar-plot", display = "cite")`). Natural mortality was assumed to vary by age and calculated using the Lorenzen curve. The weight $W$ at length $l$ was described by the function $W(l) = al^{b}$, where the constants $a = 0.0000318$ and $b = 2.8977$ were estimated from paired observations of black drum length and weight.
+The growth model used was a von Bertanlanffy model with parameters $K = 0.133$, $L_{\infty} = 1115$
+mm, $t_{0} = -1.76$, and $CV = 0.1$ (`r figure("biologypar-plot", display = "cite")`). Natural
+mortality was assumed to vary by age and calculated using the Lorenzen curve. The weight $W$ at length
+$l$ was described by the function $W(l) = al^{b}$, where the constants $a = 0.0000318$ and $b =
+2.8977$ were estimated from paired observations of black drum length and weight.
 
 ### Fishery removals
 
-Both models utilized the time series of total removals along the entire Atlantic coast of the United States (`r figure("totalremovals-plot", display = "cite")`).
+Both models utilized the time series of total removals along the entire Atlantic coast of the United
+States (`r figure("totalremovals-plot", display = "cite")`).
 
 
 ## Simple Stock Synthesis
 
-Simple Stock Synthesis is based on the same idea as the Depletion-Based Stock Reduction Analysis (DB-SRA). DB-SRA uses a Monte Carlo approach to provide a distribution of catch that would be considered over fishing based on probability distributions for current depletion, natural mortality, the ratio of fishing mortality at MSY to natural mortality, and the ratio of biomass at MSY to initial biomass. Simple Stock Synthesis uses an age structured population dynamics model instead of a production model and therefore there are differences in some of the inputs needed for Simple Stock Synthesis compared to DB-SRA. A length-based selectivity curve was specified based on the length frequency distribution from coast wide MRIP data (`r figure("selectivity-plot", display = "cite")`). A change in the ascending portion of the selectivity curve was specified due to changes in regulations in 2014. Specific values used for the double-normal selectivity curve are in `r tab("sss-table", display = "cite")`.
+Simple Stock Synthesis is based on the same idea as the Depletion-Based Stock Reduction Analysis
+(DB-SRA). DB-SRA uses a Monte Carlo approach to provide a distribution of catch that would be
+considered over fishing based on probability distributions for current depletion, natural mortality,
+the ratio of fishing mortality at MSY to natural mortality, and the ratio of biomass at MSY to initial
+biomass. Simple Stock Synthesis uses an age structured population dynamics model instead of a
+production model and therefore there are differences in some of the inputs needed for Simple Stock
+Synthesis compared to DB-SRA. A length-based selectivity curve was specified based on the length
+frequency distribution from coast wide MRIP data (`r figure("selectivity-plot", display = "cite")`). A
+change in the ascending portion of the selectivity curve was specified due to changes in regulations
+in 2014. Specific values used for the double-normal selectivity curve are in `r tab("sss-table",
+display = "cite")`.
 
 ### Base model
 
-The base model used a beta distribution for the depletion and steepness parameters. For the depletion values, parameters of the beta distribution were $\alpha = 9.9$ and $\beta = 4.2$ and for steepness the parameters were $\alpha = 5.94$ and $\beta = 1.97$. The values for steepness were set to align with the JABBA-Select model and the values for steepness were taken from the meta-analysis in Shertzer and Conn [-@ShertzerandConn2012].
+The base model used a beta distribution for the depletion and steepness parameters. For the depletion
+values, parameters of the beta distribution were $\alpha = 9.9$ and $\beta = 4.2$ and for steepness
+the parameters were $\alpha = 5.94$ and $\beta = 1.97$. The values for steepness were set to align
+with the JABBA-Select model and the values for steepness were taken from the meta-analysis in Shertzer
+and Conn [-@ShertzerandConn2012].
 
 ### Other models 
 
-An attempt was made to incorporate the MRIP CPUE index (`r figure("MRIPCPUE-plot", display = "cite")`) into the Simple Stock Synthesis model based on comments from the previous black drum benchmark assessment, where reviewers suggested to try to include some of the available indices of abundance into the DB-SRA model. The MRIP CPUE index is the only index thought to provide some information on the coastwide exploitable portion of the black drum stock and was therefore the only index selected for potential inclusion in the Simple Stock Synthesis model. 
+An attempt was made to incorporate the MRIP CPUE index (`r figure("MRIPCPUE-plot", display = "cite")`)
+into the Simple Stock Synthesis model based on comments from the previous black drum benchmark
+assessment, where reviewers suggested to try to include some of the available indices of abundance
+into the DB-SRA model. The MRIP CPUE index is the only index thought to provide some information on
+the coastwide exploitable portion of the black drum stock and was therefore the only index selected
+for potential inclusion in the Simple Stock Synthesis model. 
 
 ## Stock Synthesis model fit to length data
 
-This Stock Synthesis model was fit to length composition data from the MRIP program during 1982-2020 (`r figure("lengthcomp1-plot", display = "cite")`; `r figure("lengthcomp2-plot", display = "cite")`) and the MRIP CPUE index of abundance during 1982-2020 (`r figure("MRIPCPUE-plot", display = "cite")`). An initial model was fit with selectivity specified as in the Simple Stock synthesis base model. Another model was run where some of the parameters of the double normal selectivity curve were estimated (`r tab("ss-dn-table", display = "cite")`). Finally, another model was run with a spline selectivity where some of the parameters were estimated (`r tab("ss-spl-table", display = "cite")`). Yearly recruitment deviations were estimated for all of these Stock Synthesis models fit to length data.
+This Stock Synthesis model was fit to length composition data from the MRIP program during 1982-2020
+(`r figure("lengthcomp1-plot", display = "cite")`; `r figure("lengthcomp2-plot", display = "cite")`)
+and the MRIP CPUE index of abundance during 1982-2020 (`r figure("MRIPCPUE-plot", display = "cite")`).
+An initial model was fit with selectivity specified as in the Simple Stock synthesis base model.
+Another model was run where some of the parameters of the double normal selectivity curve were
+estimated (`r tab("ss-dn-table", display = "cite")`). Finally, another model was run with a spline
+selectivity where some of the parameters were estimated (`r tab("ss-spl-table", display = "cite")`).
+Yearly recruitment deviations were estimated for all of these Stock Synthesis models fit to length
+data.
 
 ## Code and data availability
 
+All code and data for the Simple Stock Synthesis model and the Stock Synthesis model fit to length
+data are available at: https://github.com/mmace3/SSappendix.
 

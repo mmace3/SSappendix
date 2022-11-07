@@ -160,7 +160,16 @@ The median of the F~MSY~ distribution was `r format(median(pull(subset(sss_out_d
 
 __Other models__
 
-When the MRIP CPUE index was included in the Simple Stock Synthesis model, the model did not converge unless extra variation (i.e., Q_extraSD parameter) was added to the standard deviation of the catchability coefficient for the MRIP CPUE index and the observation error for the final depletion value was increased from 0.0001 to 0.1. After these modifications, the model converged but there was a strong trend in the residuals for the MRIP CPUE index (`r figure("MRIPcpuefit-plot", display = "cite")`). Additionally, the final depletion value in 2020 was above the specified value (`r figure("Depcpuefit-plot", display = "cite")`). The trend in abundance implied by the MRIP CPUE index was different from the trend in abundance implied by the depletion assumption (`r figure("StandIndex-plot", display = "cite")`). Therefore, the CPUE index was excluded from the base model. 
+When the MRIP CPUE index was included in the Simple Stock Synthesis model, the model did not converge
+unless extra variation (i.e., Q_extraSD parameter) was added to the standard deviation of the
+catchability coefficient for the MRIP CPUE index and the observation error for the final depletion
+value was increased from 0.0001 to 0.1. After these modifications, the model converged but there was
+a strong trend in the residuals for the MRIP CPUE index (`r figure("MRIPcpuefit-plot", display =
+"cite")`). Additionally, the final depletion value in 2020 was above the specified value (`r
+figure("Depcpuefit-plot", display = "cite")`). The trend in abundance implied by the MRIP CPUE index
+was different from the trend in abundance implied by the depletion assumption (`r
+figure("StandIndex-plot", display = "cite")`). Therefore, the CPUE index was excluded from the base
+model. 
 
 ## Stock Synthesis fit to length data
 
@@ -174,6 +183,9 @@ figure("lengthcomfit2-spl-plot", display = "cite")
 
 ```
 
-Both models (double normal selectivity and spline selectivity) did not fit the length composition data well (`r figure("lengthcomfit1-dn-plot", display = "cite")`-`r figure("lengthcomfit2-spl-plot", display = "cite")`). Since neither model fit the length composition data well and both models produced unrealistically large estimates of abundance, no other results from either model are shown.
+Both models (double normal selectivity and spline selectivity) did not fit the length composition
+data well (`r figure("lengthcomfit1-dn-plot", display = "cite")`-`r figure("lengthcomfit2-spl-plot",
+display = "cite")`). Since neither model fit the length composition data well and both models
+produced unrealistically large estimates of abundance, no other results from either model are shown.
 
 

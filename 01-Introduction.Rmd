@@ -1,6 +1,16 @@
 # Introduction
 
-Stock Synthesis is a flexible age-structured modeling framework that has been widely used in fish stock assessments around the world [@MethotandWetzel2013]. Stock synthesis can incorporate many different types of information, such as age, length, and tagging data, to inform estimates for a population. There have also been Stock Synthesis models developed for use in assessments that lack some or all of the above type of information. The Simple Stock Synthesis model is one type of Stock Synthesis model that was developed for use in situations where there is only historical catch and life history information [@Cope2013]. The goal of the present study was to develop two different Stock Synthesis models for potential use in the 2022 Black Drum Benchmark Stock Assessment. The two different models are: (1) a Simple Stock Synthesis model and (2) a Stock Synthesis model fit to the length frequency distributions of total catches each year when length-frequency catch data is available.
+Stock Synthesis is a flexible age-structured modeling framework that has been widely used in fish
+stock assessments around the world [@MethotandWetzel2013]. Stock synthesis can incorporate many
+different types of information, such as age, length, and tagging data, to inform estimates for a
+population. There have also been Stock Synthesis models developed for use in assessments that lack
+some or all of the above type of information. The Simple Stock Synthesis model is one type of Stock
+Synthesis model that was developed for use in situations where there is only historical catch and life
+history information [@Cope2013]. The goal of the present study was to develop two different Stock
+Synthesis models for potential use in the 2022 Black Drum Benchmark Stock Assessment. The two
+different models are: (1) a Simple Stock Synthesis model and (2) a Stock Synthesis model fit to the
+length frequency distributions of total catches each year when length-frequency catch data is
+available.
 
 
 

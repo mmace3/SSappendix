@@ -14,7 +14,7 @@ README.txt - file you are currently reading
 # for details on Rmarkdown/bookdown see:
 #
 
-build_book.R - use this file to create word document
+build_book.R - use this file to create word document. External R libraries needed are in index.Rmd
 _bookdown.yml
 _output.yml
 01-Introduction.Rmd

@@ -29,7 +29,6 @@ options(tibble.print_max = Inf)
 
 ```{r loadpackages,}
 
-library(rprojroot)
 library(rmarkdown)
 library(bookdown)
 library(flextable)

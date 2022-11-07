@@ -1,6 +1,6 @@
-# to tell github that .tpl files are c++
+# to tell github what certain files are
     *.tpl linguist-language=C++
-	*.ss linguist-language=C++
+    *.ss linguist-language=C++
     *.sso linguist-language=C++
-	*.R linguist-language=R
-	*.Rmd linguist-language=R
+    *.R linguist-language=R
+    *.Rmd linguist-language=R

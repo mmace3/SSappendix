@@ -36,8 +36,12 @@ references.bib
 
 -------------------------------------------
 # Stock Synthesis related files
-# (could use some cleaning up! A lot of files created when SS runs are in some folders and are not
-# strictly necessary)
+#
+# Could use some cleaning up! A lot of files created when SS runs are in some folders and are not
+# strictly necessary. Also some files in top of sss (e.g., data.ss, Report.sso, starter.ss) and ss
+# (e.g., data.ss_new) subdirectories should be moved down into a subdirectory for better organization.
+# 
+
 
 - SSmodels (subdirectory)
 

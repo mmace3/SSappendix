@@ -41,7 +41,16 @@ references.bib
 # strictly necessary. Also some files in top of sss (e.g., data.ss, Report.sso, starter.ss) and ss
 # (e.g., data.ss_new) subdirectories should be moved down into a subdirectory for better organization.
 # 
-
+# There are a couple different ways to run SS. One way is to open the command line, navigate to the
+# directory that has the SS files and executable (e.g., SSmodels\ss\SS.v01.02) and type ss.exe. Also
+# there should be an .R file in each of those subdirectories thas has some code to run the model. For
+# example, in the SSmodels\ss\SS.v01.03 directory there is file SS.v01.03.R that has a line of code:
+#
+# shell("ss.exe -nohess -nox")
+#
+# that will run SS. This will work for all the SS models except for the SSS.v05.00 where the code
+# in run_mc_SSS.R will run the SS model.
+#
 
 - SSmodels (subdirectory)
 
@@ -59,7 +68,7 @@ references.bib
 
     - SSwMRIP (subdirectory) - contains code for SSS model that included the MRIP CPUE index
 
-  - ss
+  - ss (subdirectory)
 
    data.ss_new
     

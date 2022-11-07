@@ -1,3 +1,4 @@
 # to tell github that .tpl files are c++
     *.tpl linguist-language=C++
-    
+	*.ss linguist-language=C++
+    *.sso linguist-language=C++

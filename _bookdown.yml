@@ -1,0 +1,4 @@
+delete_merged_file: FALSE
+language:
+  ui:
+    chapter_name: "Chapter "

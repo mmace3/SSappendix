@@ -1,0 +1,179 @@
+
+# Results
+
+```{r readindata}
+
+sss_out_df <- read.csv("SSmodels/sss/SSS.v05.00/SSS_out_df.csv",
+                       header = TRUE) %>%
+              filter(Year >= 1900 & Year <= 2020 | is.na(Year))
+
+
+
+
+ss_dat <- SS_readdat("SSmodels/ss/data.ss_new", verbose = FALSE)
+sss_dat <- SS_readdat("SSmodels/sss/data.ss", verbose = FALSE)
+
+MRIPCPUE <- ss_dat[["CPUE"]]
+
+TotalRemovals <- 
+  sss_dat[["catch"]] %>%
+  filter(year != -999)
+
+# SS models fit to length data
+
+# SS.v01.02 - double normal selectivity
+ss_v01_02 <- SS_output("SSmodels/ss/SS.v01.02",
+                       verbose = FALSE,
+                       printstats = FALSE)
+
+length_data_dn <- ss_v01_02[["lendbase"]]
+
+
+# SS.v01.03 - spline selectivity
+ss_v01_03 <- SS_output("SSmodels/ss/SS.v01.03",
+                       verbose = FALSE,
+                       printstats = FALSE)
+
+length_data_spl <- ss_v01_03[["lendbase"]]
+
+
+```
+
+
+## Simple Stock Synthesis
+
+```{r, }
+
+# Get diagnostics from data set and format
+
+# maximum gradient component for each model
+gradients <-
+  sss_out_df %>%
+  filter(Name %in% c("max_gradient")) %>%
+  filter(Value > 1e-04)
+
+# difference between final year index observed vs. predicted
+final_dep <- 
+  sss_out_df %>%
+  filter(Name %in% c("obs_survey_fyear", "pred_survey_fyear")) %>%
+  pivot_wider(-Year, names_from = "Name", values_from = "Value") %>%
+  mutate(dep_diff = pred_survey_fyear - obs_survey_fyear) %>%
+  filter(dep_diff > 0.01)
+
+# create vector of steepness values
+steepness_vector <- 
+  sss_out_df %>%
+  filter(Name %in% c("steepness")) %>%
+  pull(Value)
+
+# create vector of depletion values
+depletion_vector <- 
+  sss_out_df %>%
+  filter(Name %in% c("obs_survey_fyear")) %>%
+  pull(Value)
+```
+
+
+```{r depletion-data,}
+
+# get summary of depletion estimates by year
+
+dep_summary <- 
+  sss_out_df %>%
+  filter(Name == "depletion") %>%
+  mutate(Value = if_else(is.na(Value), 1, Value)) %>%
+  group_by(Year) %>%
+  summarize(Mean = mean(Value),
+            Median = median(Value),
+            Low = quantile(Value, .025),
+            High = quantile(Value, .975),
+            Min = min(Value),
+            Max = max(Value)) %>%
+  ungroup()
+
+```
+
+```{r relativef}
+
+# make data frame with f_msy by model rep
+f_msy_rep <- 
+  sss_out_df %>%
+  filter(Name %in% c("f_msy")) %>%
+  select(Rep, f_msy = Value, -Year, -Name)
+
+# get summary of relative F by year (relative F = F_year/F_MSY)
+
+relf_summary <- 
+  sss_out_df %>%
+  filter(Name %in% c("f_timeseries")) %>%
+  pivot_wider(names_from = "Name", values_from = "Value") %>%
+  full_join(f_msy_rep, by = "Rep") %>%
+  mutate(Value = f_timeseries/f_msy) %>%
+  group_by(Year) %>%
+  summarize(Mean = mean(Value),
+            Median = median(Value),
+            Low = quantile(Value, .025),
+            High = quantile(Value, .975),
+            Min = min(Value),
+            Max = max(Value)) %>%
+  ungroup()
+
+# get summary of f by year
+
+f_summary <- 
+  sss_out_df %>%
+  filter(Name %in% c("f_timeseries")) %>%
+  group_by(Year) %>%
+  summarize(Mean = mean(Value),
+            Median = median(Value),
+            Low = quantile(Value, .025),
+            High = quantile(Value, .975),
+            Min = min(Value),
+            Max = max(Value)) %>%
+  ungroup()
+
+```
+
+__Base model__
+
+### Parameter Estimates
+
+`r ifelse(nrow(gradients) == 0 & nrow(final_dep) == 0, paste("All model runs had a maximum gradient component < 0.0001 and the difference between the observed and predicted survey value in the final year was < 0.01 for each run."), "Either the maximum gradient component was > 0.0001 or the difference between the observed adn predicted survey value in the final year was > 0.01 for at least one model run.")` The distribution of depletion values and steepness values used as input were similar to the specified distributions for these parameters. The distribution of depletion values used in model runs had a mean of `r format(mean(depletion_vector), digits = 2)` and a standard deviation of `r format(sd(depletion_vector), digits = 2)` and the distribution of steepness values had a mean of `r format(mean(steepness_vector), digits = 2)` and standard deviation of `r format(sd(steepness_vector), digits = 2)` (`r figure("distpar-plot", display = "cite")`). As expected, depletion decreased over time from mean value of `r pull(subset(dep_summary, Year == 1900, "Mean"))` in 1900 to `r format(pull(subset(dep_summary, Year == 2020, "Mean")), digits = 2)` in 2020 (`r figure("depletion-plot", display = "cite")`). The maximum value of depletion in 2020 was `r format(pull(subset(dep_summary, Year == 2020, "Min")), digits = 2)` and the minimum value was `r format(pull(subset(dep_summary, Year == 2020, "Max")), digits = 2)`. 
+
+
+### Reference Points
+
+#### MSY
+The median of the MSY distribution was `r format(median(pull(subset(sss_out_df, Name == "MSY", Value))), digits = 2)` mt with a minimum of `r format(min(pull(subset(sss_out_df, Name == "MSY", Value))), digits = 2)` mt and maximum of `r format(max(pull(subset(sss_out_df, Name == "MSY", Value))), digits = 2)` mt (`r figure("fmsy-plot", display = "cite")`).
+
+#### OFL
+The median of the MSY distribution was `r format(median(pull(subset(sss_out_df, Name == "OFL", Value))), digits = 2)` mt with a minimum of `r format(min(pull(subset(sss_out_df, Name == "OFL", Value))), digits = 2)` mt and maximum of `r format(max(pull(subset(sss_out_df, Name == "OFL", Value))), digits = 2)` mt (`r figure("fmsy-plot", display = "cite")`).
+
+#### B~MSY~
+
+The median of the B~MSY~ distribution was `r format(median(pull(subset(sss_out_df, Name == "SSBMSY", Value))), digits = 2)` 
+mt with a minimum of `r format(min(pull(subset(sss_out_df, Name == "SSBMSY", Value))), digits = 2)` mt and maximum of `r format(max(pull(subset(sss_out_df, Name == "SSBMSY", Value))), digits = 2, scientific = FALSE)` mt (`r figure("fmsy-plot", display = "cite")`).
+
+#### F~MSY~
+
+The median of the F~MSY~ distribution was `r format(median(pull(subset(sss_out_df, Name == "f_msy", Value))), digits = 2)`, with a minimum of `r format(min(pull(subset(sss_out_df, Name == "f_msy", Value))), digits = 2)` and maximum of `r format(max(pull(subset(sss_out_df, Name == "f_msy", Value))), digits = 2)` (`r figure("fmsy-plot", display = "cite")`).
+
+__Other models__
+
+When the MRIP CPUE index was included in the Simple Stock Synthesis model, the model did not converge unless extra variation (i.e., Q_extraSD parameter) was added to the standard deviation of the catchability coefficient for the MRIP CPUE index and the observation error for the final depletion value was increased from 0.0001 to 0.1. After these modifications, the model converged but there was a strong trend in the residuals for the MRIP CPUE index (`r figure("MRIPcpuefit-plot", display = "cite")`). Additionally, the final depletion value in 2020 was above the specified value (`r figure("Depcpuefit-plot", display = "cite")`). The trend in abundance implied by the MRIP CPUE index was different from the trend in abundance implied by the depletion assumption (`r figure("StandIndex-plot", display = "cite")`). Therefore, the CPUE index was excluded from the base model. 
+
+## Stock Synthesis fit to length data
+
+```{r, include = FALSE}
+# get numbering of figures correct for this section
+
+figure("lengthcomfit1-dn-plot", display = "cite")
+figure("lengthcomfit2-dn-plot", display = "cite")
+figure("lengthcomfit1-spl-plot", display = "cite")
+figure("lengthcomfit2-spl-plot", display = "cite")
+
+```
+
+Both models (double normal selectivity and spline selectivity) did not fit the length composition data well (`r figure("lengthcomfit1-dn-plot", display = "cite")`-`r figure("lengthcomfit2-spl-plot", display = "cite")`). Since neither model fit the length composition data well and both models produced unrealistically large estimates of abundance, no other results from either model are shown.
+
+

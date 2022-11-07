@@ -1,0 +1,20 @@
+
+
+# Conclusions
+
+## Simple Stock Synthesis
+
+
+This type of model, along with DB-SRA, was developed to provide advice about catch limits in the short term (i.e., next year) and not stock status. Given that our goal is to try and determine stock status of black drum, these types of models are not well suited to our goals. Although these models could potentially be useful along with other lines of evidence to make some conclusions about stock status. 
+
+## Stock Synthesis fit to length data
+
+This model was not fitting the length composition data very well and could benefit from more development. Specifically, more work could be done on the selectivity portion of the model. Splitting the fishery removals into different fleets with at least one fleet could help provide the model with more information about the older adult portion of the stock and result in a more reasonable estimate of abundance.
+
+
+__References__
+
+<div id="refs"></div>
+
+\newpage
+

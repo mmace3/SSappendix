@@ -1,0 +1,98 @@
+
+
+
+
+```{r sss-table,}
+# get rid of markdown formatting for bold letters that is used in tab() function
+sss_tab_cap <- tab("sss-table", caption = "Parameter values used for double-normal length-based selectivity in the Simple Stock Synthesis model.") %>%
+  str_replace_all(fixed("*"), "")
+
+ss_out_v05.00 <- SS_output("SSmodels/sss/SSS.v05.00",
+                           verbose = TRUE,
+                           covar = FALSE,
+                           printstats = FALSE)
+
+
+sss_out_params <- ss_out_v05.00[["parameters"]]
+
+sss_table <-
+  sss_out_params %>%
+    filter(Num %in% c(23:29)) %>%
+    select(Label, Value) %>%
+    flextable() %>%
+    colformat_double(digits = 2) %>%
+    set_header_labels() %>%
+    add_header_row(
+      values = sss_tab_cap,
+      colwidths = c(2)) %>%
+    autofit() %>%
+    theme_booktabs()
+
+sss_table
+
+```
+
+\newpage
+
+
+```{r, }
+
+# get rid of markdown formatting for bold letters that is used in tab() function
+ss_dn_cap <- tab("ss-dn-table", caption = "Parameters used for double-normal length-based selectivity in the Stock Synthesis model fit to length data. For parameters that are not estimated, the specificed value is shown.") %>%
+  str_replace_all(fixed("*"), "")
+
+ss_v01_02_out_params <- ss_v01_02[["parameters"]]
+
+ss_dn_table <-
+  ss_v01_02_out_params %>%
+    filter(Num %in% c(62:74)) %>%
+    select(Label, Value, Phase) %>%
+    mutate(Estimated = if_else(Phase < 0, "No", "Yes")) %>%
+    mutate(Value = if_else(Phase < 0, as.character(Value), "-")) %>%
+    select(Parameter= Label, Estimated, Value) %>%
+    flextable() %>%
+    colformat_double(digits = 2) %>%
+    set_header_labels() %>%
+    add_header_row(
+      values = ss_dn_cap,
+      colwidths = c(3)) %>%
+    autofit() %>%
+    theme_booktabs()
+
+ss_dn_table
+```
+
+
+\newpage
+
+```{r }
+
+# get rid of markdown formatting for bold letters that is used in tab() function
+ss_spl_cap <- tab("ss-spl-table", caption = "Parameters used for spline length-based selectivity in the Stock Synthesis model fit to length data. For parameters that are not estimated, the specificed value is shown.") %>%
+  str_replace_all(fixed("*"), "")
+
+ss_v01_03_out_params <- ss_v01_03[["parameters"]]
+
+ss_spl_table <-
+  ss_v01_03_out_params %>%
+    filter(Num %in% c(62:87)) %>%
+    select(Label, Value, Phase) %>%
+    mutate(Estimated = if_else(Phase < 0, "No", "Yes")) %>%
+    mutate(Value = if_else(Phase < 0, as.character(Value), "-")) %>%
+    select(Label, Estimated, Value) %>%
+    flextable() %>%
+    colformat_double(digits = 2) %>%
+    set_header_labels() %>%
+    add_header_row(
+      values = ss_spl_cap,
+      colwidths = c(3)) %>%
+    autofit() %>%
+    theme_booktabs()
+
+ss_spl_table
+```
+
+\newpage
+
+
+

@@ -1,0 +1,45 @@
+---
+title: "Development of Stock Synthesis models for the 2022 Black Drum Benchmark Stock Assessment"
+
+site: bookdown::bookdown_site
+bibliography: [references.bib]
+link-citations: true
+linkcolor: blue
+biblio-style: [fisheries-research_mod.csl]
+
+---
+
+
+```{r setoptions, echo = FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(stringsAsFactors = FALSE)
+options(tibble.print_max = Inf)
+
+# As of R 4.0 use
+# `r run_pagebreak()`
+# instead of
+# <!---CHUNK_PAGEBREAK--->
+# to create page break
+
+# 10 August 2022
+# use \newpage instead of `r run_pagebreak()` or <!---CHUNK_PAGEBREAK--->
+
+```
+
+```{r loadpackages,}
+
+library(rprojroot)
+library(rmarkdown)
+library(bookdown)
+library(flextable)
+library(r4ss)
+library(cowplot)
+library(tidyverse)
+library(officedown)
+library(flextable)
+library(officer)
+library(captioner)
+
+```
+

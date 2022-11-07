@@ -1,0 +1,10 @@
+#V3.30.16.00;_2020_09_03;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Mon Aug 08 15:25:40 2022
+
+ parameter init value is less than parameter min 9.5 < 30 for parm: 1
+fleet: 1  lencomp has obs with partition==2; will treat as partition=0 because retention not defined; N= 39
+ adjusted selparm out of base parm bounds (Phase, Iter, Parm#, yr, min, max, base, value) 1 1 1 2014 30 60 30 15
+Number_of_active_parameters_on_or_near_bounds: 6
+ N warnings: 4

@@ -1,0 +1,9 @@
+#V3.30.16.00;_2020_09_03;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Thu Aug 11 15:24:33 2022
+
+fleet: 1  lencomp has obs with partition==2; will treat as partition=0 because retention not defined; N= 39
+ Main recdev biasadj is >2 times ratio of rmse to sigmaR
+Number_of_active_parameters_on_or_near_bounds: 4
+ N warnings: 3
